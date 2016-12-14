@@ -16,7 +16,7 @@ const htmlminOpts = {
 };
 
 export default {
-  entry: 'src/app/main.ts',
+  entry: 'tmp/app/main.ts',
   format: 'iife',
   dest: 'build/bundle.es2015.js',
   plugins: [

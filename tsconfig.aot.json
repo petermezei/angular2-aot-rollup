@@ -8,11 +8,18 @@
         "sourceMap": true,
         "moduleResolution": "node",
         "experimentalDecorators": true,
-        "typeRoots": [ "./node_modules/@types" ]
+        "typeRoots": [ "./node_modules/@types" ],
+        "types": [
+            "node"
+        ]
     },
     "files": [
-      "./src/app/app.module.ts",
-      "./src/app/main.ts"
+      "./tmp/app/app.module.ts",
+      "./tmp/app/main.ts"
+    ],
+    "lib": [
+      "dom",
+      "es2015"
     ],
     "exclude": [
         "node_modules"

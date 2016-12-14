@@ -1,16 +1,16 @@
 var path = require('path');
-import * as glob from 'glob';
 var express = require('express');
 var connect = require('connect');
 var http = require('http');
 var bodyParser = require('body-parser');
+var compression = require('compression');
 
 const isDeveloping: boolean = process.env.NODE_ENV !== 'production';
 const port: number = 7000;
 const app = express();
 
 //gzip enabled
-//app.use(connect.compress());
+app.use(compression());
 
 //One Day
 var oneDay = 86400000;
@@ -38,13 +38,19 @@ app.get('/Reflect.js', (req, res) => {
     res.sendFile(path.join(__dirname, './build/Reflect.js'),{maxAge: oneDay});
 });
 
-app.get('/style.css', (req, res) => {
-    res.sendFile(path.join(__dirname, './build/style.css'),{maxAge: oneDay});
+app.get('/site.css', (req, res) => {
+    res.sendFile(path.join(__dirname, './build/site.css'),{maxAge: oneDay});
 });
 
 app.get('/favicon.png', (req, res) => {
     res.sendFile(path.join(__dirname, './build/favicon.png'),{maxAge: oneDay});
 });
+
+app.get('/slamby-logo.woff', (req, res) => {
+    res.sendFile(path.join(__dirname, './build/slamby-logo.woff'),{maxAge: oneDay});
+});
+
+app.use('/assets', express.static(path.join(__dirname,'./assets'),{maxAge: oneDay}));
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, './build/index.html'),{maxAge: oneDay});

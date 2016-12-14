@@ -16,19 +16,11 @@ const htmlminOpts = {
 };
 
 export default {
-  entry: 'src/app/main.aot.ts',
+  entry: 'tmp/app/main.aot.ts',
   format: 'iife',
   dest: 'build/bundle.es2015.js',
   plugins: [
-    angular({
-      preprocessors: {
-        template: template => pug.render(template),
-        style: scss => {
-            const css = sass.renderSync({ data: scss }).css;
-            return cssmin.minify(css).styles;
-        }
-      }
-    }),
+    angular(),
     typescript(),
     alias({ rxjs: __dirname + '/node_modules/rxjs-es' }), // rxjs fix (npm install rxjs-es) 
     nodeResolve({ jsnext: true, main: true })
